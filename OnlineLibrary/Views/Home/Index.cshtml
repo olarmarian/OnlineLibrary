@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="intro-image">
+    <img src="~/Content/Images/bookcase-books-bookshelves-256421.jpg" />
+    <a href="@Url.Action("AddBook","Book",null)" class="btn menu-btn index-btn-add">Add a book</a>
+    <a href="@Url.Action("ListBooks","Book",null)" class="btn menu-btn index-btn-view-all">View list of all the books</a>
+    <a href="@Url.Action("ListBorrowedBooks","BookingAccount",new { BookingAccountId = ViewBag.BookingAccountId })" class="btn menu-btn index-btn-view-borrowed">View list of the borrowed books</a>
+</div>

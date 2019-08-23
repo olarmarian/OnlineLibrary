@@ -1,0 +1,74 @@
+﻿@model OnlineLibrary.Models.Book
+
+@{
+    ViewBag.Title = "RemoveBook";
+}
+
+    <div class="container">
+        <h2>Remove book</h2>
+
+        <h3>Are you sure you want to delete this book?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.BookCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BookCode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NoPieces)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NoPieces)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PublishingHouse)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PublishingHouse)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "ListBooks","Book",null)
+                </div>
+            }
+        </div>
+    </div>

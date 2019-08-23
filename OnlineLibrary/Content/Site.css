@@ -1,0 +1,154 @@
+﻿*{
+    padding:0;
+    margin:0;
+    box-sizing:content-box
+}
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.list-books{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-column-gap:50px;
+    grid-row-gap:50px;
+}
+
+.block-book{
+    align-content:center;
+}
+.block-item {
+    display: block;
+    white-space: nowrap;
+    width: 240px;
+    height:inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:5px;
+}
+
+.block-item:hover {
+    white-space:normal;
+}
+
+.intro-image{
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:20em;
+    min-width:20em;
+}
+.intro-image img {
+    width: 100%;
+    max-height:100vh;
+    height: inherit ;
+}
+
+.btn {
+    border: 1px solid #808080;
+    border-radius: 50px;
+    background: linear-gradient(#0c0d44,#35348f);
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 10px;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    z-index:1;
+}
+
+.menu-btn:hover {
+    color: #fff;
+    background:none;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(#2fa6e2,#35348f);
+    z-index: -1;
+    transition: 0.8s;
+}
+
+.menu-btn::before {
+    top: 0;
+    border-radius: 0 0 50% 50%;
+}
+
+.menu-btn:hover::before {
+    height: 180%;
+}
+.index-btn-add,
+.index-btn-view-all,
+.index-btn-view-borrowed {
+    position: absolute;
+    left:35%;
+}
+
+.index-btn-add {
+    top:20%;
+}
+
+.index-btn-view-all {
+    top: 30%;
+}
+.index-btn-view-borrowed {
+    top: 40%;
+}
+.search-bar {
+    text-align: center;
+    border-radius: 30px;
+    width: 100%;
+    margin: 30px;
+}
+
+@media screen and (max-width: 767px) {
+    .index-btn-add,
+    .index-btn-view-all,
+    .index-btn-view-borrowed{
+        font-size:10px;
+        margin-top:5px;
+    }
+
+    .btn{
+        padding:5px;
+    }
+}
+
+@media screen and (max-width: 801px) {
+    .index-btn-add {
+        margin-top: 15px;
+    }
+    .index-btn-view-all {
+        margin-top: 30px;
+    }
+    .index-btn-view-borrowed {
+        margin-top: 45px;
+    }
+}

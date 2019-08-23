@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OnlineLibrary.Models.BookItem>
+
+@{
+    ViewBag.Title = "ListBorrowedBooks";
+}
+
+<h2>List of borrowed books</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.BookCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingAccount.AccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfReceip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfReturn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.BookCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingAccount.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfReceip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfReturn)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "DetailsBook","Book", new { IdBook = item.BookId },null )
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Book>
+
+@{
+    ViewBag.Title = "ListBooks";
+}
+
+    <div class="container body-content mt-5">
+        <h2>Books</h2>
+        <p>
+            @Html.ActionLink("Add New Book", "AddBook")
+        </p>
+        <span class="font-weight-bold">Title filter : </span><input id="search-bar" class="search-bar" type="text" placeholder="Search book"/>
+        <div id ="list-books" class="list-books">
+            @*
+            @foreach (var item in Model)
+            {
+                <div class="block-book">
+                    <span class="block-item">@Html.DisplayNameFor(model => model.Title) : @Html.DisplayFor(modelItem => item.Title)</span>
+                    <span class="block-item">@Html.DisplayNameFor(model => model.Author) : @Html.DisplayFor(modelItem => item.Author)</span>
+                    @if (item.File != null)
+                    {
+                        string imageBase64 = Convert.ToBase64String(item.File);
+                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <img src="@imageSrc" width="250" height="300" />
+                    }
+                    <span class="block-item">
+                        @Html.ActionLink("Borrow", "BorrowBook", new { IdBook = item.Id }) |
+                        @Html.ActionLink("Details", "DetailsBook", new { IdBook = item.Id }) |
+                        @Html.ActionLink("Edit", "UpdateBook", new { IdBook = item.Id }) |
+                        @Html.ActionLink("Delete", "RemoveBook", new { IdBook = item.Id })
+                    </span>
+                </div>
+            }
+                *@
+        </div>
+    </div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var filterTitle = $("#search-bar").val();
+            $.ajax({
+                url: "/Book/GetBooks",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { filterTitle: filterTitle }
+            }).done(function (data) {
+                var body = '';
+                console.log(data);
+                for (var i = 0; i < data.books.length; i++) {
+                    body = body + '<div class="block-book">' +
+                        '<span class="block-item">Title : ' + data.books[i].Title + '</span>' +
+                        '<span class="block-item">Author : ' + data.books[i].Author + '</span>' +
+                        '<span class="block-item" > <img src="' + data.books[i].StringFile + '" width="250" height="350"/> </span>' +
+                        '<span class="block-item">' +
+                        '@Html.ActionLink("Borrow", "BorrowBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '@Html.ActionLink("Details", "DetailsBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '@Html.ActionLink("Edit", "UpdateBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '@Html.ActionLink("Delete", "RemoveBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '</span>' +
+                        '</div>';
+                }
+
+                $("#list-books").html(body);
+            }).fail(function (xhr) {
+                alert(xhr.responseText);
+            });
+        });
+
+        $("#search-bar").on("keyup", function () {
+            var filterTitle = $("#search-bar").val();
+            $.ajax({
+                url: "/Book/GetBooks",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { filterTitle: filterTitle }
+            }).done(function (data) {
+                var body = '';
+                console.log(data);
+                for (var i = 0; i < data.books.length; i++) {
+                    body = body + '<div class="block-book">' +
+                        '<span class="block-item" >Title : ' + data.books[i].Title + '</span>' +
+                        '<span class="block-item" >Author : ' + data.books[i].Author + '</span>' +
+                        '<span class="block-item" > <img src="' + data.books[i].StringFile + '" width="250" height="350"/> </span>' +
+                        '<span class="block-item">' +
+                        '@Html.ActionLink("Borrow", "BorrowBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '@Html.ActionLink("Details", "DetailsBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '@Html.ActionLink("Edit", "UpdateBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '@Html.ActionLink("Delete", "RemoveBook", new { IdBook = "id" }) | '.replace("id",data.books[i].Id) +
+                        '</span>' +
+                        '</div>';
+                    console.log(data.books[i].Id);
+                }
+
+                $("#list-books").html(body);
+            }).fail(function (xhr) {
+                alert(xhr.responseText);
+            });
+        })
+        
+    </script>
+}
